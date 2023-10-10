@@ -1,9 +1,18 @@
+// React Imports
 import React from "react";
 import { useEffect, useState } from "react";
 
-import WavesBG from "./assets/bg-waves.svg";
+// Custom Components
 import DrumPad from "./components/DrumPad";
 import Display from "./components/Display";
+
+// Background Imgae
+import WavesBG from "./assets/bg-waves.svg";
+
+/*
+ ---- Soundbanks ----
+  1. Default Soundbank provided by FreeCodeCamp
+*/
 
 // Keys Q, W, E, A, S, D, Z, X, C
 // Codes 81, 87, 69, 65, 83, 68, 90, 88, 67
@@ -97,11 +106,13 @@ const App = () => {
       }}
     >
       <div className="container-fluid d-flex h-100 flex-column w-100 align-items-center justify-content-center p-0">
+        {/* Drum Machine Container */}
         <div
           className="container-fluid rounded-3 p-4 col-12 col-lg-6 bg-glass shadow-lg border rounded-3 border-white border-opacity-25"
           id="drum-machine"
         >
           <div className="row gy-4 ">
+            {/* DrumPad Column */}
             <div className="col-12 col-lg-6 col-sm-12">
               <div className="row row-cols-3 g-3">
                 {soundbank.map((value, index) => {
@@ -118,9 +129,9 @@ const App = () => {
                 })}
               </div>
             </div>
+            {/* Display Column */}
             <div className="col-12 col-sm-12 col-lg-6">
               <div className="d-flex flex-column align-items-center h-100 container-fluid justify-content-center">
-                {/* Display */}
                 <Display text={displayText} />
               </div>
             </div>
