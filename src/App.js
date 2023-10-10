@@ -126,6 +126,19 @@ const App = () => {
             </div>
           </div>
         </div>
+        {/* Copyright Text */}
+        <span className="text-center text-white text-opacity-75 my-2">
+          Design and Code by{" "}
+          <a
+            href="https://rifkisalim.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-white"
+          >
+            Rifki Salim
+          </a>
+          .
+        </span>
       </div>
     </div>
   );
