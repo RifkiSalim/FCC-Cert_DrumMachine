@@ -1,8 +1,90 @@
 import React from "react";
+import { useEffect, useState } from "react";
+
 import WavesBG from "./assets/bg-waves.svg";
 import DrumPad from "./components/DrumPad";
+import Display from "./components/Display";
 
-function App() {
+// Keys Q, W, E, A, S, D, Z, X, C
+// Codes 81, 87, 69, 65, 83, 68, 90, 88, 67
+const soundbank = [
+  {
+    name: "Heater 1",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3",
+    key: "Q",
+    code: 81,
+  },
+  {
+    name: "Heater 2",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3",
+    key: "W",
+    code: 87,
+  },
+  {
+    name: "Heater 3",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3",
+    key: "E",
+    code: 69,
+  },
+  {
+    name: "Heater 4",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3",
+    key: "A",
+    code: 65,
+  },
+  {
+    name: "Clap",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3",
+    key: "S",
+    code: 83,
+  },
+  {
+    name: "Open HiHat",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3",
+    key: "D",
+    code: 68,
+  },
+  {
+    name: "Kick-n'-Hat",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3",
+    key: "Z",
+    code: 90,
+  },
+  {
+    name: "Kick",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3",
+    key: "X",
+    code: 88,
+  },
+  {
+    name: "Closed HiHat",
+    src: "https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3",
+    key: "C",
+    code: 67,
+  },
+];
+
+const App = () => {
+  const [displayText, setDisplayText] = useState("");
+
+  const handleKeyDown = (e) => {
+    const pad = soundbank.find((pad) => pad.code === e.keyCode);
+    if (!pad) return;
+    const el = document.getElementById(pad.key);
+    el.click();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  });
+
+  const handleDrumPadPlay = (index) => {
+    const pad = soundbank[index];
+    setDisplayText(pad.name);
+  };
+
   return (
     <div
       className="container-fluid"
@@ -16,31 +98,30 @@ function App() {
     >
       <div className="container-fluid d-flex h-100 flex-column w-100 align-items-center justify-content-center p-0">
         <div
-          className="container-fluid rounded-3 p-4 col-12 col-lg-6 bg-glass border rounded-3 border-white border-opacity-25"
+          className="container-fluid rounded-3 p-4 col-12 col-lg-6 bg-glass shadow-lg border rounded-3 border-white border-opacity-25"
           id="drum-machine"
         >
           <div className="row gy-4 ">
             <div className="col-12 col-lg-6 col-sm-12">
               <div className="row row-cols-3 g-3">
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
-                <DrumPad />
+                {soundbank.map((value, index) => {
+                  return (
+                    <DrumPad
+                      key={index}
+                      id={value.name}
+                      audioSrc={value.src}
+                      triggerKey={value.key}
+                      onPlay={() => handleDrumPadPlay(index)}
+                      onDone={() => setDisplayText("")}
+                    />
+                  );
+                })}
               </div>
             </div>
             <div className="col-12 col-sm-12 col-lg-6">
               <div className="d-flex flex-column align-items-center h-100 container-fluid justify-content-center">
-                <div
-                  id="display"
-                  className="py-2 bg-glass-display container-fluid d-flex flex-column justify-content-center align-items-center fs-4 text-white text-opacity-75 border rounded-3 border-white border-opacity-25"
-                >
-                  Display
-                </div>
+                {/* Display */}
+                <Display text={displayText} />
               </div>
             </div>
           </div>
@@ -48,6 +129,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
