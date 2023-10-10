@@ -1,14 +1,17 @@
+// Custom Classes
 .bg-glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
 }
+
 .bg-glass-display {
   background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
 }
-
-// $primary: #e0e8ff;
+// Color overrides
 $secondary: #d1d1d1;
+
+// Bootstrap styles import
 @import "../../node_modules/bootstrap/scss/bootstrap";
