@@ -48,8 +48,6 @@ To use the Drum Machine:
 
 6. Click on the drum pads with your mouse or use the keyboard to trigger sounds.
 
-Replace `<repository-url>` with the actual URL of your project's repository on a platform like GitHub.
-
 ## License
 
 Please consult [LICENSE.md](LICENSE.md) for information on how this project is licensed.
